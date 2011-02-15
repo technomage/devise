@@ -8,10 +8,12 @@ module Devise
         resource = valid_password? && mapping.to.find_for_database_authentication(authentication_hash)
 
         if validate(resource){ resource.valid_password?(password) }
-          resource.after_database_authentication
-          success!(resource)
+          unless halted?
+            resource.after_database_authentication
+            success!(resource)
+          end
         else
-          fail(:invalid)
+          fail(:invalid) unless halted?
         end
       end
     end
