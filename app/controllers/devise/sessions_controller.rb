@@ -10,7 +10,7 @@ class Devise::SessionsController < ApplicationController
 
   # POST /resource/sign_in
   def create
-    puts "\n\nCreating a new session\n\n"
+    #puts "\n\nCreating a new session\n\n"
     resource = warden.authenticate!(:scope => resource_name, :recall => "#{controller_path}#new")
     set_flash_message(:notice, :signed_in) if is_navigational_format?
     sign_in(resource_name, resource)
@@ -19,7 +19,7 @@ class Devise::SessionsController < ApplicationController
 
   # GET /resource/sign_out
   def destroy
-    puts "\n\nDestroying a new session\n\n"
+    #puts "\n\nDestroying a new session\n\n"
     signed_in = signed_in?(resource_name)
     sign_out_and_redirect(resource_name)
     set_flash_message :notice, :signed_out if signed_in
