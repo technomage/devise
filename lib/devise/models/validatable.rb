@@ -22,6 +22,7 @@ module Devise
         assert_validations_api!(base)
 
         base.class_eval do
+          puts "\n\nAdding email validations for authentication keys: #{authentication_keys.inspect}\n\n"
           validates_presence_of   :email, :if => :email_required?
           validates_uniqueness_of :email, :scope => authentication_keys[1..-1],
             :case_sensitive => case_insensitive_keys.exclude?(:email), :allow_blank => true
